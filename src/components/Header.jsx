@@ -9,8 +9,11 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
+import { NavLink } from "react-router-dom";
 import AddBusinessRoundedIcon from "@mui/icons-material/AddBusinessRounded";
 import DrawerComp from "./Drawer";
+import { Link } from "react-router-dom";
+
 const Header = () => {
   const [value, setValue] = useState();
   const theme = useTheme();
@@ -19,14 +22,18 @@ const Header = () => {
   console.log(isMatch);
 
   return (
-    <React.Fragment>
-      <AppBar sx={{ background: "#063970" }}>
+    <>
+      <AppBar sx={{ background: "primary" }}>
         <Toolbar>
-          <AddBusinessRoundedIcon sx={{ transform: "scale(2)" }} />
+          <NavLink to="/" style={{ textDecoration: "none" }}>
+            <Typography variant="h3" sx={{ fontWeight: "700", color: "white" }}>
+              Enguaz
+            </Typography>
+          </NavLink>
           {isMatch ? (
             <>
               <Typography sx={{ fontSize: "2rem", paddingLeft: "10%" }}>
-                Shoppee
+                Enguaz
               </Typography>
               <DrawerComp />
             </>
@@ -34,27 +41,27 @@ const Header = () => {
             <>
               <Tabs
                 sx={{ marginLeft: "auto" }}
-                indicatorColor="secondary"
+                indicatorColor="white"
                 textColor="inherit"
                 value={value}
                 onChange={(e, value) => setValue(value)}
               >
-                <Tab label="Products" />
-                <Tab label="Services" />
-                <Tab label="About Us" />
-                <Tab label="Contact" />
+                <Tab LinkComponent={NavLink} to="booking" label="Booking" />
+                <Tab LinkComponent={NavLink} to="services" label="Services" />
+                <Tab LinkComponent={NavLink} to="about" label="About Us" />
+                <Tab LinkComponent={NavLink} to="contact" label="Contact" />
               </Tabs>
-              <Button sx={{ marginLeft: "auto" }} variant="contained">
+              {/* <Button sx={{ marginLeft: "auto" }} variant="contained">
                 Login
               </Button>
               <Button sx={{ marginLeft: "10px" }} variant="contained">
                 SignUp
-              </Button>
+              </Button> */}
             </>
           )}
         </Toolbar>
       </AppBar>
-    </React.Fragment>
+    </>
   );
 };
 

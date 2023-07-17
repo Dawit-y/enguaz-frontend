@@ -4,22 +4,33 @@ import {
   TextField,
   Paper,
   Grid,
+  Box,
   Typography,
-  Select,
-  FormControl,
-  MenuItem,
-  withStyles,
+  Container,
 } from "@mui/material";
+import { Link } from "react-router-dom";
+
 const styles = {
+  box: {
+    width: "100%",
+    marginLeft: "50px",
+    marginTop: "20px",
+  },
   paper: {
     padding: 20,
     backgroundColor: "#fff",
     borderRadius: 8,
+    display: "flex",
+    flexDirection: "column",
   },
   button: {
     margin: 10,
   },
+  textField: {
+    marginBottom: "20px",
+  },
 };
+
 const Booking = () => {
   const [origin, setOrigin] = useState("");
   const [destination, setDestination] = useState("");
@@ -28,12 +39,15 @@ const Booking = () => {
   const [passengers, setPassengers] = useState(1);
 
   return (
-    <Paper>
-      <Grid container spacing={2}>
-        <Grid item xs={12}>
-          <Typography variant="h4">Flight Booking</Typography>
-        </Grid>
-        <Grid item xs={6}>
+    <Container>
+      <Box style={styles.box}>
+        <Paper style={styles.paper}>
+          <Typography
+            variant="h4"
+            sx={{ alignSelf: "center", marginBottom: "10px" }}
+          >
+            Trip Booking
+          </Typography>
           <TextField
             name="origin"
             label="Origin"
@@ -41,8 +55,6 @@ const Booking = () => {
             onChange={(event) => setOrigin(event.target.value)}
             style={styles.textField}
           />
-        </Grid>
-        <Grid item xs={6}>
           <TextField
             name="destination"
             label="Destination"
@@ -50,8 +62,6 @@ const Booking = () => {
             onChange={(event) => setDestination(event.target.value)}
             style={styles.textField}
           />
-        </Grid>
-        <Grid item xs={6}>
           <TextField
             name="departureDate"
             label="Departure Date"
@@ -59,8 +69,6 @@ const Booking = () => {
             onChange={(event) => setDepartureDate(event.target.value)}
             style={styles.textField}
           />
-        </Grid>
-        <Grid item xs={6}>
           <TextField
             name="returnDate"
             label="Return Date"
@@ -68,31 +76,14 @@ const Booking = () => {
             onChange={(event) => setReturnDate(event.target.value)}
             style={styles.textField}
           />
-        </Grid>
-        <Grid item xs={6}>
-          <FormControl>
-            <Select
-              name="passengers"
-              value={passengers}
-              onChange={(event) => setPassengers(event.target.value)}
-              label="Passengers"
-              style={styles.formControl}
-            >
-              <MenuItem value={1}>1</MenuItem>
-              <MenuItem value={2}>2</MenuItem>
-              <MenuItem value={3}>3</MenuItem>
-              <MenuItem value={4}>4</MenuItem>
-              <MenuItem value={5}>5</MenuItem>
-            </Select>
-          </FormControl>
-        </Grid>
-        <Grid item xs={12}>
-          <Button variant="contained" color="primary" style={styles.button}>
-            Book Flight
-          </Button>
-        </Grid>
-      </Grid>
-    </Paper>
+          <Link to="trips/">
+            <Button variant="contained" color="primary" style={styles.button}>
+              Search for Trip
+            </Button>
+          </Link>
+        </Paper>
+      </Box>
+    </Container>
   );
 };
 
